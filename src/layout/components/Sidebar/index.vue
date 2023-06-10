@@ -41,6 +41,15 @@ export default {
             if (meta.activeMenu) {
                 return meta.activeMenu;
             }
+          // 前端大屏新窗口 跳转
+          if (path.includes('statistics')) {
+            const routes = this.$router.resolve({ name: 'passengerFlowStatistics' })
+            //新窗口打开页面
+            window.open(routes.href, '_blank')
+            //原窗口保持原来的页面
+            this.$router.go(-1);
+            return 0;
+          }
             return path;
         },
         showLogo() {

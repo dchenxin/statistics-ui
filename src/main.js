@@ -20,8 +20,24 @@ import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
 import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, download, handleTree } from "@/utils/ruoyi";
 import Pagination from "@/components/Pagination";
+import dataV from '@jiaminghi/data-view';
+import Icon from 'vue-awesome/components/Icon';
+import 'vue-awesome/icons/chart-bar.js';
+import 'vue-awesome/icons/chart-area.js';
+import 'vue-awesome/icons/chart-pie.js';
+import 'vue-awesome/icons/chart-line.js';
+import 'vue-awesome/icons/align-left.js';
 //自定义表格工具扩展
 import RightToolbar from "@/components/RightToolbar"
+
+//引入echart
+//4.x 引用方式
+import echarts from 'echarts'
+//5.x 引用方式为按需引用
+//希望使用5.x版本的话,需要在package.json中更新版本号,并切换引用方式
+//import * as echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+Vue.config.productionTip = false;
 
 // 引入富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
@@ -82,6 +98,10 @@ Vue.component('Pagination', Pagination)
 Vue.component('RightToolbar', RightToolbar)
 
 Vue.use(permission)
+
+// 全局注册
+Vue.component('dataIcon', Icon);
+Vue.use(dataV);
 
 /**
  * If you don't want to use mock-server

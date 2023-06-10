@@ -5,58 +5,58 @@ import { parseTime } from './ruoyi'
  */
 export function formatDate(cellValue) {
   if (cellValue == null || cellValue == "") return "";
-  var date = new Date(cellValue) 
+  var date = new Date(cellValue)
   var year = date.getFullYear()
   var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate() 
-  var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours() 
-  var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes() 
+  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+  var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+  var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
   var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
   return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
 }
 
-/**
- * @param {number} time
- * @param {string} option
- * @returns {string}
- */
-export function formatTime(time, option) {
-  if (('' + time).length === 10) {
-    time = parseInt(time) * 1000
-  } else {
-    time = +time
-  }
-  const d = new Date(time)
-  const now = Date.now()
-
-  const diff = (now - d) / 1000
-
-  if (diff < 30) {
-    return '刚刚'
-  } else if (diff < 3600) {
-    // less 1 hour
-    return Math.ceil(diff / 60) + '分钟前'
-  } else if (diff < 3600 * 24) {
-    return Math.ceil(diff / 3600) + '小时前'
-  } else if (diff < 3600 * 24 * 2) {
-    return '1天前'
-  }
-  if (option) {
-    return parseTime(time, option)
-  } else {
-    return (
-      d.getMonth() +
-      1 +
-      '月' +
-      d.getDate() +
-      '日' +
-      d.getHours() +
-      '时' +
-      d.getMinutes() +
-      '分'
-    )
-  }
-}
+// /**
+//  * @param {number} time
+//  * @param {string} option
+//  * @returns {string}
+//  */
+// export function formatTime(time, option) {
+//   if (('' + time).length === 10) {
+//     time = parseInt(time) * 1000
+//   } else {
+//     time = +time
+//   }
+//   const d = new Date(time)
+//   const now = Date.now()
+//
+//   const diff = (now - d) / 1000
+//
+//   if (diff < 30) {
+//     return '刚刚'
+//   } else if (diff < 3600) {
+//     // less 1 hour
+//     return Math.ceil(diff / 60) + '分钟前'
+//   } else if (diff < 3600 * 24) {
+//     return Math.ceil(diff / 3600) + '小时前'
+//   } else if (diff < 3600 * 24 * 2) {
+//     return '1天前'
+//   }
+//   if (option) {
+//     return parseTime(time, option)
+//   } else {
+//     return (
+//       d.getMonth() +
+//       1 +
+//       '月' +
+//       d.getDate() +
+//       '日' +
+//       d.getHours() +
+//       '时' +
+//       d.getMinutes() +
+//       '分'
+//     )
+//   }
+// }
 
 /**
  * @param {string} url
@@ -209,45 +209,61 @@ export function getTime(type) {
   }
 }
 
+// /**
+//  * @param {Function} func
+//  * @param {number} wait
+//  * @param {boolean} immediate
+//  * @return {*}
+//  */
+// export function debounce(func, wait, immediate) {
+//   let timeout, args, context, timestamp, result
+//
+//   const later = function() {
+//     // 据上一次触发时间间隔
+//     const last = +new Date() - timestamp
+//
+//     // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
+//     if (last < wait && last > 0) {
+//       timeout = setTimeout(later, wait - last)
+//     } else {
+//       timeout = null
+//       // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+//       if (!immediate) {
+//         result = func.apply(context, args)
+//         if (!timeout) context = args = null
+//       }
+//     }
+//   }
+//
+//   return function(...args) {
+//     context = this
+//     timestamp = +new Date()
+//     const callNow = immediate && !timeout
+//     // 如果延时不存在，重新设定延时
+//     if (!timeout) timeout = setTimeout(later, wait)
+//     if (callNow) {
+//       result = func.apply(context, args)
+//       context = args = null
+//     }
+//
+//     return result
+//   }
+// }
+
 /**
- * @param {Function} func
- * @param {number} wait
- * @param {boolean} immediate
- * @return {*}
+ * @param {Function} fn 防抖函数
+ * @param {Number} delay 延迟时间
  */
-export function debounce(func, wait, immediate) {
-  let timeout, args, context, timestamp, result
-
-  const later = function() {
-    // 据上一次触发时间间隔
-    const last = +new Date() - timestamp
-
-    // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
-    if (last < wait && last > 0) {
-      timeout = setTimeout(later, wait - last)
-    } else {
-      timeout = null
-      // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
-      if (!immediate) {
-        result = func.apply(context, args)
-        if (!timeout) context = args = null
-      }
-    }
-  }
-
-  return function(...args) {
-    context = this
-    timestamp = +new Date()
-    const callNow = immediate && !timeout
-    // 如果延时不存在，重新设定延时
-    if (!timeout) timeout = setTimeout(later, wait)
-    if (callNow) {
-      result = func.apply(context, args)
-      context = args = null
-    }
-
-    return result
-  }
+export function debounce(fn, delay) {
+  var timer;
+  return function () {
+    var context = this;
+    var args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, delay);
+  };
 }
 
 /**
@@ -330,7 +346,7 @@ export function makeMap(str, expectsLowerCase) {
     ? val => map[val.toLowerCase()]
     : val => map[val]
 }
- 
+
 export const exportDefault = 'export default '
 
 export const beautifierConf = {
@@ -387,4 +403,41 @@ export function camelCase(str) {
 export function isNumberStr(str) {
   return /^[+-]?(0|([1-9]\d*))(\.\d+)?$/g.test(str)
 }
- 
+
+/**
+ * @param {date} time 需要转换的时间
+ * @param {String} fmt 需要转换的格式 如 yyyy-MM-dd、yyyy-MM-dd HH:mm:ss
+ */
+export function formatTime(time, fmt) {
+  if (!time) return '';
+  else {
+    const date = new Date(time);
+    const o = {
+      'M+': date.getMonth() + 1,
+      'd+': date.getDate(),
+      'H+': date.getHours(),
+      'm+': date.getMinutes(),
+      's+': date.getSeconds(),
+      'q+': Math.floor((date.getMonth() + 3) / 3),
+      S: date.getMilliseconds(),
+    };
+    if (/(y+)/.test(fmt))
+      fmt = fmt.replace(
+        RegExp.$1,
+        (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+      );
+    for (const k in o) {
+      if (new RegExp('(' + k + ')').test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length === 1
+            ? o[k]
+            : ('00' + o[k]).substr(('' + o[k]).length)
+        );
+      }
+    }
+    return fmt;
+  }
+}
+
+

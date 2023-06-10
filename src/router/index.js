@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import LayoutDisplay from '@/layout/display'
 
 /**
  * Note: 路由配置项
@@ -121,44 +122,68 @@ export const constantRoutes = [
 
   {
     path: '/statistics',
-    component: Layout,
+    component: {render: (e) => e("router-view")},
     hidden: true,
     children: [
+      // {
+      //   path: '/buyEarlyStatistics',
+      //   component: (resolve) => require(['@/views/module/statistics/buyEarlyStatistics'], resolve),
+      //   name: 'BuyEarlyStatistics',
+      //   meta: { title: '提前购票时间' }
+      // },
+      // {
+      //   path: '/lineSearchStatistics',
+      //   component: (resolve) => require(['@/views/module/statistics/lineSearchStatistics'], resolve),
+      //   name: 'LineSearchStatistics',
+      //   meta: { title: '线路搜索频率' }
+      // },
+      // {
+      //   path: '/modelAndRealLoadStatistics',
+      //   component: (resolve) => require(['@/views/module/statistics/modelAndRealLoadStatistics'], resolve),
+      //   name: 'ModelAndRealLoadStatistics',
+      //   meta: { title: '模块点击及实载率' }
+      // },
+      // {
+      //   path: '/operationStatistics',
+      //   component: (resolve) => require(['@/views/module/statistics/operationStatistics'], resolve),
+      //   name: 'OperationStatistics',
+      //   meta: { title: '小程序运营情况' }
+      // },
+      // {
+      //   path: '/spreadStatistics',
+      //   component: (resolve) => require(['@/views/module/statistics/spreadStatistics'], resolve),
+      //   name: 'SpreadStatistics',
+      //   meta: { title: '用户性别年龄' }
+      // },
+      // {
+      //   path: '/stationStatistics',
+      //   component: (resolve) => require(['@/views/module/statistics/stationStatistics'], resolve),
+      //   name: 'StationStatistics',
+      //   meta: { title: '起终点站查询频次' }
+      // },
       {
-        path: '/buyEarlyStatistics',
-        component: (resolve) => require(['@/views/module/statistics/buyEarlyStatistics'], resolve),
-        name: 'BuyEarlyStatistics',
-        meta: { title: '提前购票时间' }
+        path: '/passengerFlow',
+        component: (resolve) => require(['@/views/module/statistics/passengerFlowStatistics'], resolve),
+        name: 'passengerFlowStatistics',
+        meta: { title: '客流统计分析' }
       },
       {
-        path: '/lineSearchStatistics',
-        component: (resolve) => require(['@/views/module/statistics/lineSearchStatistics'], resolve),
-        name: 'LineSearchStatistics',
-        meta: { title: '线路搜索频率' }
+        path: '/energyConsumption',
+        component: (resolve) => require(['@/views/module/statistics/energyConsumptionStatistics'], resolve),
+        name: 'energyConsumptionStatistics',
+        meta: { title: '能源消耗统计分析' }
       },
       {
-        path: '/modelAndRealLoadStatistics',
-        component: (resolve) => require(['@/views/module/statistics/modelAndRealLoadStatistics'], resolve),
-        name: 'ModelAndRealLoadStatistics',
-        meta: { title: '模块点击及实载率' }
+        path: '/operations',
+        component: (resolve) => require(['@/views/module/statistics/operationsStatistics'], resolve),
+        name: 'operationsStatistics',
+        meta: { title: '运营统计分析' }
       },
       {
-        path: '/operationStatistics',
-        component: (resolve) => require(['@/views/module/statistics/operationStatistics'], resolve),
-        name: 'OperationStatistics',
-        meta: { title: '小程序运营情况' }
-      },
-      {
-        path: '/spreadStatistics',
-        component: (resolve) => require(['@/views/module/statistics/spreadStatistics'], resolve),
-        name: 'SpreadStatistics',
-        meta: { title: '用户性别年龄' }
-      },
-      {
-        path: '/stationStatistics',
-        component: (resolve) => require(['@/views/module/statistics/stationStatistics'], resolve),
-        name: 'StationStatistics',
-        meta: { title: '起终点站查询频次' }
+        path: '/secure',
+        component: (resolve) => require(['@/views/module/statistics/secureStatistics'], resolve),
+        name: 'secureStatistics',
+        meta: { title: '安全统计分析' }
       },
     ]
   },

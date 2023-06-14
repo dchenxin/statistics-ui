@@ -6,7 +6,7 @@
           <data-icon name="chart-pie" class="text-icon"></data-icon>
         </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">地图数据</span>
+          <span class="fs-xl text mx-2">用户地区分布</span>
           <dv-decoration-1 class="dv-dec-1" />
         </div>
       </div>

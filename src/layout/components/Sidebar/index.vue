@@ -41,9 +41,19 @@ export default {
             if (meta.activeMenu) {
                 return meta.activeMenu;
             }
+
           // 前端大屏新窗口 跳转
           if (path.includes('statistics')) {
-            const routes = this.$router.resolve({ name: 'passengerFlowStatistics' })
+            let routes;
+            if (path.includes('passengerFlow')) {
+               routes = this.$router.resolve({ name: 'passengerFlowStatistics' })
+            }else if(path.includes('energyConsumption')){
+               routes = this.$router.resolve({ name: 'energyConsumptionStatistics' })
+            }else if(path.includes('operations')){
+               routes = this.$router.resolve({ name: 'operationsStatistics' })
+            }else if(path.includes('secure')){
+               routes = this.$router.resolve({ name: 'secureStatistics' })
+            }
             //新窗口打开页面
             window.open(routes.href, '_blank')
             //原窗口保持原来的页面

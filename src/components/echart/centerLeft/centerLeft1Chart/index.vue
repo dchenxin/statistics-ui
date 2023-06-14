@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 60px">
     <Chart :cdata="cdata" />
   </div>
 </template>
@@ -10,14 +10,14 @@ export default {
   data () {
     return {
       cdata: {
-        xData: ["data1", "data2", "data3", "data4", "data5", "data6"],
+        xData: ["17岁以下", "18~24岁", "25~29岁", "30~39岁", "40~49岁", "50岁以上"],
         seriesData: [
-          { value: 10, name: "data1" },
-          { value: 5, name: "data2" },
-          { value: 15, name: "data3" },
-          { value: 25, name: "data4" },
-          { value: 20, name: "data5" },
-          { value: 35, name: "data6" }
+          { value: 10, name: "17岁以下" },
+          { value: 5, name: "18~24岁" },
+          { value: 15, name: "25~29岁" },
+          { value: 25, name: "30~39岁" },
+          { value: 20, name: "40~49岁" },
+          { value: 35, name: "50岁以上" }
         ]
       }
     }

@@ -17,7 +17,17 @@ const store = new Vuex.Store({
     permission,
     settings
   },
-  getters
+  getters,
+  mutations: {
+    setCollapsed(state,value){
+    },
+  },
+  actions: {
+    getUserdata({commit}){
+
+    },
+
+  },
 })
 
 export default store

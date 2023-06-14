@@ -6,30 +6,30 @@
           <data-icon name="chart-bar" class="text-icon"></data-icon>
         </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">任务通过率</span>
+          <span class="fs-xl text mx-2">用户年龄段分布</span>
           <dv-decoration-3 class="dv-dec-3" />
         </div>
       </div>
       <div class="d-flex jc-center">
         <CenterLeft1Chart />
       </div>
-      <!-- 4个主要的数据 -->
-      <div class="bottom-data">
-        <div
-          class="item-box mt-2"
-          v-for="(item, index) in numberData"
-          :key="index"
-        >
-          <div class="d-flex">
-            <span class="coin">￥</span>
-            <dv-digital-flop class="dv-digital-flop" :config="item.number" />
-          </div>
-          <p class="text" style="text-align: center;">
-            {{ item.text }}
-            <span class="colorYellow">(件)</span>
-          </p>
-        </div>
-      </div>
+<!--      &lt;!&ndash; 4个主要的数据 &ndash;&gt;-->
+<!--      <div class="bottom-data">-->
+<!--        <div-->
+<!--          class="item-box mt-2"-->
+<!--          v-for="(item, index) in numberData"-->
+<!--          :key="index"-->
+<!--        >-->
+<!--          <div class="d-flex">-->
+<!--            <span class="coin">￥</span>-->
+<!--            <dv-digital-flop class="dv-digital-flop" :config="item.number" />-->
+<!--          </div>-->
+<!--          <p class="text" style="text-align: center;">-->
+<!--            {{ item.text }}-->
+<!--            <span class="colorYellow">(件)</span>-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>

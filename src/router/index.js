@@ -165,7 +165,7 @@ export const constantRoutes = [
         path: '/passengerFlow',
         component: (resolve) => require(['@/views/module/statistics/passengerFlowStatistics'], resolve),
         name: 'passengerFlowStatistics',
-        meta: { title: '客流统计分析' }
+        meta: { title: '用户统计分析' }
       },
       {
         path: '/energyConsumption',

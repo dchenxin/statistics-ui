@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      title: '公交调度管理系统',
+      title: '大数据分析系统',
       logo: logoImg
     }
   }

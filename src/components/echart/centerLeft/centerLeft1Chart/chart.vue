@@ -60,12 +60,15 @@ export default {
           },
           series: [
             {
-              name: "通过率统计",
+              name: "用户年龄分布",
               type: "pie",
               radius: [10, 50],
               roseType: "area",
               center: ["50%", "40%"],
-              data: newData.seriesData
+              data: newData.seriesData,
+              label:{
+                formatter: '{b}\n {d}%'
+              },
             }
           ]
         }

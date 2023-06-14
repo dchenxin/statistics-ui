@@ -1,5 +1,5 @@
 module.exports = {
-  title: '公交调度管理系统',
+  title: '大数据分析系统',
 
   /**
    * 是否系统布局配置

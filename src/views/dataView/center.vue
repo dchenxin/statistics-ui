@@ -56,22 +56,22 @@ export default {
     return {
       titleItem: [
         {
-          title: '今年累计任务建次数',
+          title: '总用户量',
           number: {
             number: [120],
-            toFixed: 1,
+            // toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
             style: {
               fontSize: 26
-            }
+            },
           }
         },
         {
-          title: '本月累计任务次数',
+          title: '今年新增用户量',
           number: {
             number: [18],
-            toFixed: 1,
+            // toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -80,10 +80,10 @@ export default {
           }
         },
         {
-          title: '今日累计任务次数',
+          title: '本月新增用户量',
           number: {
-            number: [2],
-            toFixed: 1,
+            number: [10],
+            // toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -92,10 +92,10 @@ export default {
           }
         },
         {
-          title: '今年失败任务次数',
+          title: '今日新增用户量',
           number: {
-            number: [14],
-            toFixed: 1,
+            number: [1],
+            // toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -107,7 +107,7 @@ export default {
           title: '今年成功任务次数',
           number: {
             number: [106],
-            toFixed: 1,
+            // toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -119,7 +119,7 @@ export default {
           title: '今年达标任务个数',
           number: {
             number: [100],
-            toFixed: 1,
+            // toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
             style: {

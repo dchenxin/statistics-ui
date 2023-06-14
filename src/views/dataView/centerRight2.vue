@@ -5,11 +5,11 @@
         <span>
           <data-icon name="align-left" class="text-icon"></data-icon>
         </span>
-        <span class="fs-xl text mx-2">产品销售渠道分析</span>
+        <span class="fs-xl text mx-2">用户提前购票时间分析</span>
       </div>
       <div class="d-flex ai-center flex-column body-box">
         <dv-capsule-chart class="dv-cap-chart" :config="config"/>
-        <centerRight2Chart1/>
+<!--        <centerRight2Chart1/>-->
       </div>
     </div>
   </div>
@@ -22,6 +22,7 @@
     data() {
       return {
         config: {
+          showValue:true,
           data: [
             {
               name: '南阳',
@@ -42,6 +43,26 @@
             {
               name: '西峡',
               value: 98
+            },
+            {
+              name: '西峡',
+              value: 98
+            },
+            {
+              name: '西峡',
+              value: 78
+            },
+            {
+              name: '西峡',
+              value: 68
+            },
+            {
+              name: '西峡',
+              value: 58
+            },
+            {
+              name: '西峡',
+              value: 81
             }
           ]
         }
@@ -77,7 +98,7 @@
 
       .dv-cap-chart {
         width: 100%;
-        height: 160px;
+        height: 370px;
       }
     }
   }

@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard-editor-container">
-    <div style="width: 20px;height: 20px;background-color: #337ab7" @click="openNew" />
     <!--    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">-->
     <!--      <el-col style="height: 500px">-->
     <!--        <div class="chart-wrapper">-->
@@ -512,12 +511,6 @@
       },
       realLoadBtnClick() {
         this.getRealLoad();
-      },
-
-
-      openNew() {
-        const routes = this.$router.resolve({ name: 'passengerFlowStatistics' })
-        window.open(routes.href, '_blank')
       },
     }
   }

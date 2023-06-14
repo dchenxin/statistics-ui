@@ -1,112 +1,190 @@
 <template>
-  <div class="dashboard-editor-container">
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <el-col style="height: 500px">
-        <div class="chart-wrapper">
-          <div style="margin-bottom: 50px">
-            <span class="title-text">运营统计分析</span>
-            <el-radio-group v-model="defaultValue02" @change="buyEarlyBtnClick" size="small" style="float: right" fill="#63aff5">
-              <el-radio-button label="昨日"></el-radio-button>
-              <el-radio-button label="近七日"></el-radio-button>
-              <el-radio-button label="本月"></el-radio-button>
-              <el-radio-button label="本年"></el-radio-button>
-            </el-radio-group>
+  <div id="index" ref="appRef">
+    <div class="bg" :style="{backgroundImage: 'url('+ img.url +')'}">
+      <dv-loading v-if="loading">Loading...</dv-loading>
+      <div v-else class="host-body">
+        <div class="d-flex jc-center">
+          <dv-decoration-10 class="dv-dec-10" />
+          <div class="d-flex jc-center">
+            <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
+            <div class="title">
+              <span class="title-text">大数据可视化平台</span>
+              <dv-decoration-6
+                class="dv-dec-6"
+                :reverse="true"
+                :color="['#50e3c2', '#67a1e5']"
+              />
+            </div>
+            <dv-decoration-8
+              class="dv-dec-8"
+              :reverse="true"
+              :color="decorationColor"
+            />
           </div>
-          <total-table v-on:table-select-change="tableChange" :table-data="tableData"></total-table>
-          <!--          <line-chart :chart-data="lineChartData03"/>-->
+          <dv-decoration-10 class="dv-dec-10-s" />
         </div>
-      </el-col>
-    </el-row>
+
+        <!-- 第二行 -->
+        <div class="d-flex jc-between px-2">
+          <div class="d-flex aside-width">
+            <div class="react-left ml-4 react-l-s">
+              <span class="react-left"></span>
+              <span class="text">数据分析1</span>
+            </div>
+            <div class="react-left ml-3">
+              <span class="text">数据分析2</span>
+            </div>
+          </div>
+          <div class="d-flex aside-width">
+            <div class="react-right bg-color-blue mr-3">
+              <span class="text fw-b">公交数据统计分析</span>
+            </div>
+            <div class="react-right mr-4 react-l-s">
+              <span class="react-after"></span>
+              <span class="text"
+              >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="body-box">
+          <!-- 第三行数据 -->
+          <div class="content-box">
+            <div>
+              <dv-border-box-12>
+                <centerLeft1 />
+              </dv-border-box-12>
+            </div>
+            <div>
+              <dv-border-box-12>
+                <centerLeft2 />
+              </dv-border-box-12>
+            </div>
+            <!-- 中间 -->
+            <div>
+              <center />
+            </div>
+            <!-- 中间 -->
+            <div>
+              <centerRight2 />
+            </div>
+            <div>
+              <dv-border-box-13>
+                <centerRight1 />
+              </dv-border-box-13>
+            </div>
+          </div>
+
+          <!-- 第四行数据 -->
+          <div class="bottom-box">
+            <dv-border-box-13>
+              <bottomLeft />
+            </dv-border-box-13>
+            <dv-border-box-12>
+              <bottomRight />
+            </dv-border-box-12>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import {getBuyEarlyStatistics} from "@/api/module/index";
-  import TotalTable from '@/views/dashboard/TotalTable'
-  import ModelDropDown from '@/views/dashboard/ModelDropDown'
+  import drawMixin from "../../../utils/drawMixin";
+  import { formatTime } from '../../../utils'
+  import centerLeft1 from '../../dataView/centerLeft1'
+  import centerLeft2 from '../../dataView/centerLeft2'
+  import centerRight1 from '../../dataView/centerRight1'
+  import centerRight2 from '../../dataView/centerRight2'
+  import center from '../../dataView/center'
+  import bottomLeft from '../../dataView/bottomLeft'
+  import bottomRight from '../../dataView/bottomRight'
 
   export default {
-    name: 'BuyEarlyStatistics',
-    components: {
-      TotalTable,
-      ModelDropDown
-    },
-    watch: {
-      clickStatus: {
-        deep: true,
-        handler() {
-          this.getOperation();
-        }
-      }
-    },
+    mixins: [ drawMixin ],
     data() {
       return {
-        defaultValue02: '昨日',
-        tableData: [],
-        tableSelectValue:1,
+        img:{
+          url:require('@/assets/pageBg.png'),
+        },
+        timing: null,
+        loading: true,
+        dateDay: null,
+        dateYear: null,
+        dateWeek: null,
+        weekday: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+        decorationColor: ['#568aea', '#000000']
       }
     },
-    mounted() {
-      this.$nextTick(() => {
-        this.getBuyEarly();
-      })
+    components: {
+      centerLeft1,
+      centerLeft2,
+      centerRight1,
+      centerRight2,
+      center,
+      bottomLeft,
+      bottomRight
     },
-    created() {
+    mounted() {
+      this.timeFn()
+      this.cancelLoading()
+      this.changeBgColor()
+    },
+    beforeDestroy () {
+      clearInterval(this.timing)
     },
     methods: {
-      //---------提前购票统计----------
-      getBuyEarly(){
-        getBuyEarlyStatistics({type:this.defaultValue02,selectType:this.tableSelectValue}).then(response => {
-          this.tableData = response.data
-        })
+      //单击隐藏侧边栏
+      changeBgColor() {
+        const element = document.getElementById("app");
+        element.setAttribute('style','background-color: #020308');
       },
-      buyEarlyBtnClick() {
-        this.getBuyEarly();
+      timeFn() {
+        this.timing = setInterval(() => {
+          this.dateDay = formatTime(new Date(), 'HH: mm: ss')
+          this.dateYear = formatTime(new Date(), 'yyyy-MM-dd')
+          this.dateWeek = this.weekday[new Date().getDay()]
+        }, 1000)
       },
-      tableChange(val) {
-        this.tableSelectValue = val;
-        this.getBuyEarly();
-      },
+      cancelLoading() {
+        setTimeout(() => {
+          this.loading = false
+        }, 500)
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .dashboard-editor-container {
-    padding: 32px;
-    background-color: rgb(240, 242, 245);
-    position: relative;
-
-    .chart-wrapper {
-      background: #fff;
-      padding: 16px 16px 0;
-      margin-bottom: 32px;
-      height: 360px;
-    }
+  @import "../../../assets/scss/index.scss";
+  .d-flex {
+    display: flex;
   }
-
-  .title-text {
-    line-height: 18px;
-    color: rgba(0, 0, 0, 0.45);
-    font-size: 18px;
-    margin-bottom: 12px;
+  .jc-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
-
-  .title-text-02 {
-    line-height: 18px;
-    color: rgba(0, 0, 0, 0.45);
-    font-size: 14px;
-    margin-bottom: 12px;
+  .jc-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
-
-  .number-span {
-    font-weight: bolder;
-    font-size: 16px;
+  .fw-b {
+    font-weight: bold;
   }
-
-  @media (max-width: 1024px) {
-    .chart-wrapper {
-      padding: 8px;
-    }
+  .ml-4 {
+    margin-left: 1rem;
+  }
+  .ml-3 {
+    margin-left: 0.75rem;
+  }
+  .mr-3 {
+    margin-right: 0.75rem;
+  }
+  .bg-color-blue {
+    background-color: #1a5cd7;
   }
 </style>
